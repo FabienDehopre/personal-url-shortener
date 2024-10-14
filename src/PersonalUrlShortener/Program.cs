@@ -1,6 +1,8 @@
 using Auth0.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Components.Authorization;
+using PersonalUrlShortener.AuthenticationStateSyncer;
 using PersonalUrlShortener.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,9 @@ builder.Services.AddAuth0WebAppAuthentication(options =>
     options.Domain = builder.Configuration["Auth0:Domain"] ?? throw new ApplicationException("Missing Auth0 Domain");
     options.ClientId = builder.Configuration["Auth0:ClientId"] ?? throw new ApplicationException("Missing Auth0 ClientId");
 });
+
+builder.Services.AddCascadingAuthenticationState();
+builder.Services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAuthenticationStateProvider>();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()

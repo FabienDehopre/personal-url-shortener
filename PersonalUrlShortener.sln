@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalUrlShortener", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalUrlShortener.Client", "src\PersonalUrlShortener.Client\PersonalUrlShortener.Client.csproj", "{2B5EEA2C-8950-408C-8D1B-3BA2FD6B689F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalUrlShortener.Shared", "src\PersonalUrlShortener.Shared\PersonalUrlShortener.Shared.csproj", "{668C2534-7A29-451B-B309-1DBA49650969}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{2B5EEA2C-8950-408C-8D1B-3BA2FD6B689F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B5EEA2C-8950-408C-8D1B-3BA2FD6B689F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B5EEA2C-8950-408C-8D1B-3BA2FD6B689F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{668C2534-7A29-451B-B309-1DBA49650969}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{668C2534-7A29-451B-B309-1DBA49650969}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{668C2534-7A29-451B-B309-1DBA49650969}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{668C2534-7A29-451B-B309-1DBA49650969}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
