@@ -1,7 +1,14 @@
+using Auth0.AspNetCore.Authentication;
 using PersonalUrlShortener.Client.Pages;
 using PersonalUrlShortener.Components;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuth0WebAppAuthentication(options =>
+{
+    options.Domain = builder.Configuration["Auth0:Domain"] ?? throw new ApplicationException("Missing Auth0 Domain");
+    options.ClientId = builder.Configuration["Auth0:ClientId"] ?? throw new ApplicationException("Missing Auth0 ClientId");
+});
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
