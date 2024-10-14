@@ -50,6 +50,12 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        if (authenticationState is not null)
+        {
+            var state = await authenticationState;
+            Username = state?.User?.Identity?.Name ?? string.Empty;
+        }
+        
         // Simulate asynchronous loading to demonstrate streaming rendering
         await Task.Delay(500);
 
@@ -61,12 +67,6 @@ else
             TemperatureC = Random.Shared.Next(-20, 55),
             Summary = summaries[Random.Shared.Next(summaries.Length)]
         }).ToArray();
-
-        if (authenticationState is not null)
-        {
-            var state = await authenticationState;
-            Username = state?.User?.Identity?.Name ?? string.Empty;
-        }
     }
 
     private class WeatherForecast
