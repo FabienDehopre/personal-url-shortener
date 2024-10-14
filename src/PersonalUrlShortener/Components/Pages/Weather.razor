@@ -1,10 +1,12 @@
 ﻿@page "/weather"
+@attribute [Authorize]
 @attribute [StreamRendering]
 
 <PageTitle>Weather</PageTitle>
 
 <h1>Weather</h1>
 
+<p>Hello @Username!</p>
 <p>This component demonstrates showing data.</p>
 
 @if (forecasts == null)
@@ -40,9 +42,20 @@ else
 
 @code {
     private WeatherForecast[]? forecasts;
+    
+    [CascadingParameter]
+    private Task<AuthenticationState>? authenticationState { get; set; }
+
+    private string Username = "";
 
     protected override async Task OnInitializedAsync()
     {
+        if (authenticationState is not null)
+        {
+            var state = await authenticationState;
+            Username = state?.User?.Identity?.Name ?? string.Empty;
+        }
+        
         // Simulate asynchronous loading to demonstrate streaming rendering
         await Task.Delay(500);
 

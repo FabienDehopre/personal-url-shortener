@@ -8,7 +8,9 @@
 
     <ItemGroup>
         <ProjectReference Include="..\PersonalUrlShortener.Client\PersonalUrlShortener.Client.csproj"/>
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.8"/>
+        <PackageReference Include="Auth0.AspNetCore.Authentication" Version="1.4.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.10" />
+        <ProjectReference Include="..\PersonalUrlShortener.Shared\PersonalUrlShortener.Shared.csproj" />
     </ItemGroup>
 
 </Project>
