@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-      './Components/**/*.{razor,html}'
+      './Components/**/*.{razor,html}',
+      '../PersonalUrlShortener.Client/Pages/**/*.{razor,html}',
   ],
   theme: {
     extend: {},

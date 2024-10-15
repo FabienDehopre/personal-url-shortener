@@ -1,98 +1,35 @@
-﻿@if (IsMobile)
-{
-    <nav class="flex flex-1 flex-col">
-        <ul role="list" class="flex flex-1 flex-col gap-y-7">
-            <li>
-                <ul role="list" class="-mx-2 space-y-1">
-                    <li>
-                        <NavLink href="" Match="NavLinkMatch.All"
-                                 class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
-                                 ActiveClass="group flex gap-x-3 rounded-md bg-gray-800 p-2 text-sm font-semibold leading-6 text-white">
-                            <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink href="counter"
-                                 class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
-                                 ActiveClass="group flex gap-x-3 rounded-md bg-gray-800 p-2 text-sm font-semibold leading-6 text-white">
-                            <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink href="weather"
-                                 class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
-                                 ActiveClass="group flex gap-x-3 rounded-md bg-gray-800 p-2 text-sm font-semibold leading-6 text-white">
-                            <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-                        </NavLink>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-}
-else 
-{
-    <nav>
-        <ul role="list" class="flex flex-1 flex-col gap-y-7">
-            <li>
-                <ul role="list" class="-mx-2 space-y-1">
-                    <li>
-                        <NavLink href="" Match="NavLinkMatch.All" 
-                                 class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:text-white hover:bg-gray-800" 
-                                 ActiveClass="group flex gap-x-3 rounded-md bg-gray-800 p-2 text-sm font-semibold leading-6 text-white">
-                            <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink href="counter" 
-                                 class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:text-white hover:bg-gray-800" 
-                                 ActiveClass="group flex gap-x-3 rounded-md bg-gray-800 p-2 text-sm font-semibold leading-6 text-white">
-                            <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink href="weather" 
-                                 class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:text-white hover:bg-gray-800" 
-                                 ActiveClass="group flex gap-x-3 rounded-md bg-gray-800 p-2 text-sm font-semibold leading-6 text-white">
-                            <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-                        </NavLink>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-}
+﻿<nav class="@(IsMobile ? "flex flex-1 flex-col" : "")">
+    <ul role="list" class="flex flex-1 flex-col gap-y-7">
+        <li>
+            <ul role="list" class="-mx-2 space-y-1">
+                <li>
+                    <NavLink href="" Match="NavLinkMatch.All"
+                             class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
+                             ActiveClass="group flex gap-x-3 rounded-md bg-gray-800 p-2 text-sm font-semibold leading-6 text-white">
+                        <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink href="counter"
+                             class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
+                             ActiveClass="group flex gap-x-3 rounded-md bg-gray-800 p-2 text-sm font-semibold leading-6 text-white">
+                        <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink href="weather"
+                             class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
+                             ActiveClass="group flex gap-x-3 rounded-md bg-gray-800 p-2 text-sm font-semibold leading-6 text-white">
+                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
+                    </NavLink>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
 @code
 {
     [Parameter]
     public bool IsMobile { get; set; }
 }
-@*<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">PersonalUrlShortener</a>
-    </div>
-</div>
-
-<input type="checkbox" title="Navigation menu" class="navbar-toggler"/>
-
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
-    </nav>
-</div>*@
