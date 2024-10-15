@@ -6,4 +6,5 @@ riderModule.iml
 .DS_Store
 .idea
 
-**/wwwroot/styles.css
+**/wwwroot/app.css
+node_modules/
