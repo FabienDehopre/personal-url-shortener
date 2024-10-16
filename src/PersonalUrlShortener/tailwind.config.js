@@ -1,11 +1,18 @@
 /** @type {import('tailwindcss').Config} */
+
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 export default {
   content: [
       './Components/**/*.{razor,html}',
       '../PersonalUrlShortener.Client/Pages/**/*.{razor,html}',
   ],
   theme: {
-    extend: {},
+    extend: {
+        fontFamily: {
+            sans: ['InterVariable', ...defaultTheme.fontFamily.sans],
+        },
+    },
   },
   plugins: [
       require('@tailwindcss/forms'),
