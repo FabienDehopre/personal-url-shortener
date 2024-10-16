@@ -9,6 +9,7 @@
     <ItemGroup>
         <ProjectReference Include="..\PersonalUrlShortener.Client\PersonalUrlShortener.Client.csproj"/>
         <PackageReference Include="Auth0.AspNetCore.Authentication" Version="1.4.1" />
+        <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.6.2" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.10" />
         <ProjectReference Include="..\PersonalUrlShortener.Shared\PersonalUrlShortener.Shared.csproj" />
     </ItemGroup>
