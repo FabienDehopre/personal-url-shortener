@@ -1,11 +1,11 @@
 ﻿@using System.Security.Claims
-@rendermode InteractiveServer
+@rendermode InteractiveAuto
 @inject AuthenticationStateProvider GetAuthenticationStateAsync
 
 <!-- Profile dropdown -->
 <AuthorizeView>
     <Authorized>
-        <OutsideClickHandler class="relative" OnOutsideClick="CloseUserMenu" StopPropagation="!UserMenuVisible">
+        <OutsideClickHandler class="relative self-center" OnOutsideClick="CloseUserMenu" StopPropagation="!UserMenuVisible">
             <button type="button" class="-m-1.5 flex items-center p-1.5" id="user-menu-button" aria-expanded="false" aria-haspopup="true" @onclick:stopPropagation="true" @onclick="ToggleUserMenu">
                 <span class="sr-only">Open user menu</span>
                 <img class="h-8 w-8 rounded-full bg-gray-50" src="@Picture" alt="">
@@ -75,4 +75,5 @@
         UserMenuVisible = false;
         StateHasChanged();
     }
+
 }
