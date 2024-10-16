@@ -1,0 +1,7 @@
+﻿@inherits TailwindTransitionalComponentBase
+
+<div class="@_hiddenClass @TransitionClasses.ToString() @AdditionalClasses" @attributes="InputAttributes">
+    <CascadingValue Value="this" IsFixed="true">
+        @ChildContent
+    </CascadingValue>
+</div>
