@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.JSInterop;
 
-namespace PersonalUrlShortener.Shared.Components;
+namespace PersonalUrlShortener.Client.Components;
 
 public class OutsideClickHandler : ComponentBase, IAsyncDisposable
 {

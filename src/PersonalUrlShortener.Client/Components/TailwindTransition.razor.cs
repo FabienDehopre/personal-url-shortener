@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace PersonalUrlShortener.Shared.Components;
+namespace PersonalUrlShortener.Client.Components;
 
 public partial class TailwindTransition : TailwindTransitionalComponentBase
 {
-    [CascadingParameter] public TailwindTransitionalElement Parent { get; set; }
+    [CascadingParameter] public TailwindTransitionalElement Parent { get; set; } = default!;
 
     public async Task Toggle()
     {

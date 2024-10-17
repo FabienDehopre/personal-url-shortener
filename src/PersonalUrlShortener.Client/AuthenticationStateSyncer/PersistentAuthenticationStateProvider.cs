@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Security.Claims;
-using PersonalUrlShortener.Shared.AuthenticationStateSyncer;
 
 namespace PersonalUrlShortener.Client.AuthenticationStateSyncer;
 

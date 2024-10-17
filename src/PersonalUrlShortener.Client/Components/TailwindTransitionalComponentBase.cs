@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Components;
 
-namespace PersonalUrlShortener.Shared.Components;
+namespace PersonalUrlShortener.Client.Components;
 
 public class TailwindTransitionalComponentBase : ComponentBase
 {
@@ -28,13 +28,13 @@ public class TailwindTransitionalComponentBase : ComponentBase
         public string LeavingTo { get; set; } = "";
 
         [Parameter]
-        public RenderFragment ChildContent { get; set; }
+        public RenderFragment ChildContent { get; set; } = default!;
 
         [Parameter]
-        public string AdditionalClasses { get; set; }
+        public string AdditionalClasses { get; set; } = string.Empty;
 
         [Parameter(CaptureUnmatchedValues = true)]
-        public Dictionary<string, object> InputAttributes { get; set; }
+        public Dictionary<string, object> InputAttributes { get; set; } = new();
 
         protected StringBuilder TransitionClasses = new();
 

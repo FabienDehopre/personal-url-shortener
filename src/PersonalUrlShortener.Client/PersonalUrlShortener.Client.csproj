@@ -9,12 +9,17 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.6.2" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.10" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="8.0.10" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\PersonalUrlShortener.Shared\PersonalUrlShortener.Shared.csproj" />
+      <AdditionalFiles Include="Components\TailwindTransition.razor" />
+      <AdditionalFiles Include="Components\TailwindTransitionalElement.razor" />
+      <AdditionalFiles Include="Layout\MainLayout.razor" />
+      <AdditionalFiles Include="Layout\NavMenu.razor" />
+      <AdditionalFiles Include="Layout\ProfileDropdown.razor" />
     </ItemGroup>
 
 </Project>
