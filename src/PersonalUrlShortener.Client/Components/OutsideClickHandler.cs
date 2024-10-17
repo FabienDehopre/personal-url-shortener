@@ -11,7 +11,7 @@ public class OutsideClickHandler : ComponentBase, IAsyncDisposable
     private DotNetObjectReference<OutsideClickHandler> _objectReference = default!;
     private int _objectIndex = -1;
 
-    [Inject] public IJSRuntime JSRuntime { get; set; } = default!;
+    [Inject] public IJSRuntime JsRuntime { get; set; } = default!;
 
     /// <summary>
     /// The content to which the value should be provided.
@@ -50,14 +50,14 @@ public class OutsideClickHandler : ComponentBase, IAsyncDisposable
     /// </para>
     /// </summary>
     [DisallowNull]
-    public ElementReference? Element { get; private set; }
+    private ElementReference? Element { get; set; }
 
     /// <inheritdoc />
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         builder.OpenElement(0, "div");
         builder.AddMultipleAttributes(1, AdditionalAttributes);
-        builder.AddElementReferenceCapture(2, __element => Element = __element);
+        builder.AddElementReferenceCapture(2, element => Element = element);
         builder.AddContent(3, ChildContent);
         builder.CloseElement();
     }
@@ -107,12 +107,12 @@ public class OutsideClickHandler : ComponentBase, IAsyncDisposable
 
     private async Task AddOutsideClick()
     {
-        _objectIndex = await JSRuntime.InvokeAsync<int>("addOutsideClickEvent", Element!, _objectReference);
+        _objectIndex = await JsRuntime.InvokeAsync<int>("addOutsideClickEvent", Element!, _objectReference);
     }
 
     private async Task RemoveOutsideClick()
     {
-        await JSRuntime.InvokeVoidAsync("removeOutsideClickEvent", _objectIndex);
+        await JsRuntime.InvokeVoidAsync("removeOutsideClickEvent", _objectIndex);
     }
 
     /// <inheritdoc />

@@ -9,7 +9,7 @@
 
 <div class="mt-6 border-t border-gray-100">
     <dl class="divide-y divide-gray-100">
-        @foreach (var claim in _claims)
+        @foreach (var claim in MyClaims)
         {
             <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                 <dt class="text-sm font-medium leading-6 text-gray-900">@claim.Name</dt>
@@ -20,12 +20,12 @@
 </div>
 
 @code {
-    private readonly List<(string Name, string Value)> _claims = new();
+    private List<(string Name, string Value)> MyClaims { get; } = new();
 
     protected override async Task OnInitializedAsync()
     {
-        var authstate = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
-        var user = authstate.User;
-        _claims.AddRange(user.Claims.Select(c => (c.Type, c.Value)));
+        var authState = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
+        var user = authState.User;
+        MyClaims.AddRange(user.Claims.Select(c => (c.Type, c.Value)));
     }
 }

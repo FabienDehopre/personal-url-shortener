@@ -9,7 +9,7 @@
 <p>Hello @Username!</p>
 <p>This component demonstrates showing data.</p>
 
-@if (forecasts == null)
+@if (Forecasts == null)
 {
     <p>
         <em>Loading...</em>
@@ -27,7 +27,7 @@ else
         </tr>
         </thead>
         <tbody>
-        @foreach (var forecast in forecasts)
+        @foreach (var forecast in Forecasts)
         {
             <tr>
                 <td>@forecast.Date.ToShortDateString()</td>
@@ -41,19 +41,18 @@ else
 }
 
 @code {
-    private WeatherForecast[]? forecasts;
-    
     [CascadingParameter]
-    private Task<AuthenticationState>? authenticationState { get; set; }
+    private Task<AuthenticationState>? AuthenticationState { get; set; }
 
-    private string Username = "";
+    private WeatherForecast[]? Forecasts { get; set; }
+    private string Username { get; set; } = "";
 
     protected override async Task OnInitializedAsync()
     {
-        if (authenticationState is not null)
+        if (AuthenticationState is not null)
         {
-            var state = await authenticationState;
-            Username = state?.User?.Identity?.Name ?? string.Empty;
+            var state = await AuthenticationState;
+            Username = state.User.Identity?.Name ?? string.Empty;
         }
         
         // Simulate asynchronous loading to demonstrate streaming rendering
@@ -61,19 +60,13 @@ else
 
         var startDate = DateOnly.FromDateTime(DateTime.Now);
         var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
-        forecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        {
-            Date = startDate.AddDays(index),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = summaries[Random.Shared.Next(summaries.Length)]
-        }).ToArray();
+        Forecasts = Enumerable.Range(1, 5)
+            .Select(index => new WeatherForecast(startDate.AddDays(index), Random.Shared.Next(-20, 55), summaries[Random.Shared.Next(summaries.Length)]))
+            .ToArray();
     }
 
-    private class WeatherForecast
+    private record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
     {
-        public DateOnly Date { get; set; }
-        public int TemperatureC { get; set; }
-        public string? Summary { get; set; }
         public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
     }
 

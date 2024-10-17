@@ -40,12 +40,11 @@ public partial class TailwindTransitionalElement : TailwindTransitionalComponent
         if (firstRender)
         {
             _isFirstRender = false;
-            return;
         }
     }
 
     private string _hiddenClass = "";
-    private bool _isTransitional => !string.IsNullOrWhiteSpace(Entering) || !string.IsNullOrWhiteSpace(Leaving);
+    private bool IsTransitional => !string.IsNullOrWhiteSpace(Entering) || !string.IsNullOrWhiteSpace(Leaving);
 
     public async Task Toggle()
     {
@@ -62,10 +61,10 @@ public partial class TailwindTransitionalElement : TailwindTransitionalComponent
         });
     }
 
-    internal async Task ToggleAsync()
+    private async Task ToggleAsync()
     {
         var tasks = new List<Task>();
-        if (_isTransitional)
+        if (IsTransitional)
         {
             tasks.Add(Toggle());
         }

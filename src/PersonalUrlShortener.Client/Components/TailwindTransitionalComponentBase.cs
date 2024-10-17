@@ -36,7 +36,7 @@ public class TailwindTransitionalComponentBase : ComponentBase
         [Parameter(CaptureUnmatchedValues = true)]
         public Dictionary<string, object> InputAttributes { get; set; } = new();
 
-        protected StringBuilder TransitionClasses = new();
+        protected readonly StringBuilder TransitionClasses = new();
 
         protected async Task ShowAsync()
         {
