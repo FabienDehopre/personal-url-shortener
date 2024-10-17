@@ -5,7 +5,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 export default {
   content: [
       './Components/**/*.{razor,html}',
-      '../PersonalUrlShortener.Client/Pages/**/*.{razor,html}',
+      '../PersonalUrlShortener.Client/**/*.{razor,html}',
   ],
   theme: {
     extend: {
