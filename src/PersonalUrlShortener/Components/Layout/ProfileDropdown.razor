@@ -47,35 +47,3 @@
         </a>
     </NotAuthorized>
 </AuthorizeView>
-
-@code {
-    [CascadingParameter]
-    private Task<AuthenticationState>? AuthenticationState { get; set; }
-    
-    private bool UserMenuVisible { get; set; } = false;
-    private string UserName { get; set; } = "";
-    private string Picture { get; set; } = "";
-
-    private void ToggleUserMenu() => UserMenuVisible = !UserMenuVisible;
-
-    protected override async Task OnInitializedAsync()
-    {
-        if (AuthenticationState is not null)
-        {
-            var authState = await AuthenticationState;
-            var user = authState.User;
-            if (user.Identity is { IsAuthenticated: true })
-            {
-                UserName = user.FindFirst("nickname")?.Value ?? "(Unknown)";
-                Picture = user.FindFirst("picture")?.Value ?? "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80";
-            }
-        }
-    }
-
-    private void CloseUserMenu()
-    {
-        UserMenuVisible = false;
-        StateHasChanged();
-    }
-
-}

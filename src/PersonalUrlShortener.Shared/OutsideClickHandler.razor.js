@@ -5,7 +5,6 @@ export class OutsideClickHandler {
      * @returns {OutsideClickHandler}
      */
     static createInstance(element, dotNetRef) {
-        console.log('CREATING INSTANCE', element, dotNetRef);
         return new OutsideClickHandler(element, dotNetRef);
     }
     
@@ -24,7 +23,6 @@ export class OutsideClickHandler {
      * @param {MouseEvent} event
      */
     handleDocumentClick(event) {
-        console.log('CLICK DOCUMENT', event, this);
         if (!this.element.contains(event.target)) {
             this.dotNetRef.invokeMethodAsync('NotifyClickOutside');
         }

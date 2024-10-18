@@ -3,8 +3,6 @@ using Blazorise;
 using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Components.Authorization;
-using PersonalUrlShortener.AuthenticationStateSyncer;
 using PersonalUrlShortener.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,9 +12,14 @@ builder.Services.AddAuth0WebAppAuthentication(options =>
     options.Domain = builder.Configuration["Auth0:Domain"] ?? throw new ApplicationException("Missing Auth0 Domain");
     options.ClientId = builder.Configuration["Auth0:ClientId"] ?? throw new ApplicationException("Missing Auth0 ClientId");
 });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("OnlyMe", policy => 
+        policy.RequireAuthenticatedUser()
+            .RequireUserName("fabien@dehopre.com"));
+});
 
 builder.Services.AddCascadingAuthenticationState();
-builder.Services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAuthenticationStateProvider>();
 
 builder.Services.AddBlazorise().AddFontAwesomeIcons().AddEmptyProviders();
 
@@ -65,7 +68,11 @@ app.MapGet("/Account/Logout", async (HttpContext httpContext) =>
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
-    .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(PersonalUrlShortener.Client._Imports).Assembly);
+    .AddInteractiveWebAssemblyRenderMode();
+
+app.MapFallback(() =>
+{
+    return Results.Redirect("/weather");
+});
 
 app.Run();
