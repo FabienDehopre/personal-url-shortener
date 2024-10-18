@@ -14,6 +14,12 @@ builder.Services.AddAuth0WebAppAuthentication(options =>
     options.Domain = builder.Configuration["Auth0:Domain"] ?? throw new ApplicationException("Missing Auth0 Domain");
     options.ClientId = builder.Configuration["Auth0:ClientId"] ?? throw new ApplicationException("Missing Auth0 ClientId");
 });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("OnlyMe", policy => 
+        policy.RequireAuthenticatedUser()
+            .RequireUserName("fabien@dehopre.com"));
+});
 
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAuthenticationStateProvider>();
