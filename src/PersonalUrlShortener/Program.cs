@@ -68,4 +68,9 @@ app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(typeof(PersonalUrlShortener.Client._Imports).Assembly);
 
+app.MapFallback(() =>
+{
+    return Results.Redirect("/weather");
+});
+
 app.Run();
