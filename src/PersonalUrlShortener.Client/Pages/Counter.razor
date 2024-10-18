@@ -22,9 +22,9 @@
         if (AuthenticationState is not null)
         {
             var state = await AuthenticationState;
-
-            Username = state?.User?.Identity?.Name ?? string.Empty;
+            Username = state.User.Identity?.Name ?? string.Empty;
         }
+        
         await base.OnInitializedAsync();
     }
 
