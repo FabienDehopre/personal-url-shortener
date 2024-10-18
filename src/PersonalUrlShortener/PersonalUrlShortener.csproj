@@ -9,8 +9,41 @@
     <ItemGroup>
         <ProjectReference Include="..\PersonalUrlShortener.Client\PersonalUrlShortener.Client.csproj"/>
         <PackageReference Include="Auth0.AspNetCore.Authentication" Version="1.4.1" />
+        <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.6.2" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.10" />
-        <ProjectReference Include="..\PersonalUrlShortener.Shared\PersonalUrlShortener.Shared.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+        <Watch Include="./Styles/tailwind.css" Exclude="./wwwroot/**/*;obj\**\*;bin\**\*" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="package.json" />
+      <None Include="package.json">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </None>
+      <Content Remove="package-lock.json" />
+      <None Include="package-lock.json">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+    <Target Name="NpmInstall" Inputs="package.json" Outputs="node_modules/.install-stamp">
+        <PropertyGroup>
+            <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+        </PropertyGroup>
+        <Exec Command="npm ci"      Condition="'$(RestorePackagesWithLockFile)' == 'true'" />
+        <Exec Command="npm install" Condition="'$(RestorePackagesWithLockFile)' != 'true'" />
+        <!-- Write the stamp file, so incremental builds work -->
+        <Touch Files="node_modules/.install-stamp" AlwaysCreate="true" />
+    </Target>
+
+    <Target Name="TailwindDebug" DependsOnTargets="NpmInstall" BeforeTargets="BeforeBuild" Condition="'$(Configuration)' == 'Debug'">
+        <Exec Command="npm run build:debug" />
+    </Target>
+
+    <Target Name="TailwindRelease" DependsOnTargets="NpmInstall" BeforeTargets="BeforeBuild" Condition="'$(Configuration)' == 'Release'">
+        <Exec Command="npm run build:release" EnvironmentVariables="NODE_ENV=production" />
+    </Target>
 
 </Project>

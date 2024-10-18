@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Security.Claims;
-using PersonalUrlShortener.Shared.AuthenticationStateSyncer;
 
 namespace PersonalUrlShortener.Client.AuthenticationStateSyncer;
 
@@ -19,7 +18,7 @@ public class PersistentAuthenticationStateProvider(PersistentComponentState pers
 
         Claim[] claims = [
             new(ClaimTypes.NameIdentifier, userInfo.UserId),
-            new(ClaimTypes.Name, userInfo.Name ?? string.Empty),
+            new(ClaimTypes.Name, userInfo.Name),
             new(ClaimTypes.Email, userInfo.Email ?? string.Empty)];
 
         return Task.FromResult(

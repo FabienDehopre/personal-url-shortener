@@ -1,19 +1,19 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full bg-white">
 
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <base href="/"/>
-    <link rel="stylesheet" href="bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <link rel="stylesheet" href="app.css"/>
-    <link rel="stylesheet" href="PersonalUrlShortener.styles.css"/>
+    <link href="_content/Blazorise.Icons.FontAwesome/v6/css/all.min.css" rel="stylesheet"/>
     <link rel="icon" type="image/png" href="favicon.png"/>
-    <HeadOutlet/>
+    <HeadOutlet @rendermode="InteractiveAuto"/>
 </head>
 
-<body>
-<Routes/>
+<body class="h-full">
+<Routes @rendermode="InteractiveAuto"/>
 <script src="_framework/blazor.web.js"></script>
 </body>
 

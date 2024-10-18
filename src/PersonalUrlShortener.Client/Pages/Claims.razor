@@ -1,0 +1,31 @@
+﻿@page "/claims"
+@attribute [Authorize]
+@inject AuthenticationStateProvider GetAuthenticationStateAsync
+
+<div class="px-4 sm:px-0">
+    <h3 class="text-base font-semibold leading-7 text-gray-900">My Claims</h3>
+    <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Display all the claims assigned to the user's identity.</p>
+</div>
+
+<div class="mt-6 border-t border-gray-100">
+    <dl class="divide-y divide-gray-100">
+        @foreach (var claim in MyClaims)
+        {
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                <dt class="text-sm font-medium leading-6 text-gray-900">@claim.Name</dt>
+                <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">@claim.Value</dd>
+            </div>
+        }
+    </dl>
+</div>
+
+@code {
+    private List<(string Name, string Value)> MyClaims { get; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
+        var user = authState.User;
+        MyClaims.AddRange(user.Claims.Select(c => (c.Type, c.Value)));
+    }
+}

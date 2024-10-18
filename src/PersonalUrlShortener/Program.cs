@@ -1,4 +1,6 @@
 using Auth0.AspNetCore.Authentication;
+using Blazorise;
+using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -15,6 +17,8 @@ builder.Services.AddAuth0WebAppAuthentication(options =>
 
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAuthenticationStateProvider>();
+
+builder.Services.AddBlazorise().AddFontAwesomeIcons().AddEmptyProviders();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()

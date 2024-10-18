@@ -1,0 +1,136 @@
+﻿@inherits LayoutComponentBase
+
+<div>
+    <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
+    <TailwindTransitionalElement @bind-IsOpened="ShowSideBar" 
+                                 AdditionalClasses="relative z-50 lg:hidden" 
+                                 role="dialog" aria-modal="true">
+        <!--
+          Off-canvas menu backdrop, show/hide based on off-canvas menu state.
+
+          Entering: "transition-opacity ease-linear duration-300"
+            From: "opacity-0"
+            To: "opacity-100"
+          Leaving: "transition-opacity ease-linear duration-300"
+            From: "opacity-100"
+            To: "opacity-0"
+        -->
+        <TailwindTransitionalElement @bind-IsOpened="ShowSideBar"
+                                     Entering="transition-opacity ease-linear duration-300"
+                                     EnteringFrom="opacity-0"
+                                     EnteringTo="opacity-100"
+                                     Leaving="transition-opacity ease-linear duration-300"
+                                     LeavingFrom="opacity-100"
+                                     LeavingTo="opacity-0"
+                                     Duration="300"
+                                     AdditionalClasses="fixed inset-0 bg-gray-900/80" aria-hidden="true"></TailwindTransitionalElement>
+        <div class="fixed inset-0 flex">
+            <!--
+                Off-canvas menu, show/hide based on off-canvas menu state.
+
+                Entering: "transition ease-in-out duration-300 transform"
+                  From: "-translate-x-full"
+                  To: "translate-x-0"
+                Leaving: "transition ease-in-out duration-300 transform"
+                  From: "translate-x-0"
+                  To: "-translate-x-full"
+              -->
+            <TailwindTransition Entering="transition ease-in-out duration-300 transform"
+                                EnteringFrom="-translate-x-full"
+                                EnteringTo="translate-x-0"
+                                Leaving="transition ease-in-out duration-300 transform"
+                                LeavingFrom="translate-x-0"
+                                LeavingTo="-translate-x-full"
+                                Duration="300"
+                                AdditionalClasses="relative mr-16 flex w-full max-w-xs flex-1">
+                <!--
+                  Close button, show/hide based on off-canvas menu state.
+
+                  Entering: "ease-in-out duration-300"
+                    From: "opacity-0"
+                    To: "opacity-100"
+                  Leaving: "ease-in-out duration-300"
+                    From: "opacity-100"
+                    To: "opacity-0"
+                -->
+                <TailwindTransition Entering="ease-in-out duration-300"
+                                    EnteringFrom="opacity-0"
+                                    EnteringTo="opacity-100"
+                                    Leaving="ease-in-out duration-300"
+                                    LeavingFrom="opacity-100"
+                                    LeavingTo="opacity-0"
+                                    Duration="300"
+                                    AdditionalClasses="absolute left-full top-0 flex w-16 justify-center pt-5">
+                    <button type="button" class="-m-2.5 p-2.5" @onclick="CloseSideBar">
+                        <span class="sr-only">Close sidebar</span>
+                        <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </TailwindTransition>
+                
+                <!-- Sidebar component, swap this element with another sidebar if you like -->
+                <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4 ring-1 ring-white/10">
+                    <div class="flex h-16 shrink-0 items-center">
+                        <img class="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+                    </div>
+                    <NavMenu IsMobile="true"/>
+                </div>
+            </TailwindTransition>
+        </div>
+    </TailwindTransitionalElement>
+
+    <!-- Static sidebar for desktop -->
+    <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+        <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4">
+            <div class="flex h-16 shrink-0 items-center">
+                <img class="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+            </div>
+            <NavMenu IsMobile="false"/>
+        </div>
+    </div>
+    <div class="lg:pl-72">
+        <div class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
+            <button type="button" class="-m-2.5 p-2.5 text-gray-700 lg:hidden" @onclick="OpenSideBar">
+                <span class="sr-only">Open sidebar</span>
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+                </svg>
+            </button>
+
+            <!-- Separator -->
+            <div class="h-6 w-px bg-gray-900/10 lg:hidden" aria-hidden="true"></div>
+
+            <div class="flex flex-1 gap-x-4 self-stretch justify-end lg:gap-x-6">
+                <ProfileDropdown/>
+            </div>
+        </div>
+
+        <main class="py-10">
+            <div class="px-4 sm:px-6 lg:px-8">
+                @Body
+            </div>
+        </main>
+    </div>
+</div>
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
+
+@code {
+    private bool ShowSideBar { get; set; }
+
+    private void CloseSideBar()
+    {
+        ShowSideBar = false;
+    }
+
+    private void OpenSideBar()
+    {
+        ShowSideBar = true;
+    }
+
+}
