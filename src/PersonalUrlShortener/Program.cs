@@ -3,8 +3,6 @@ using Blazorise;
 using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Components.Authorization;
-using PersonalUrlShortener.AuthenticationStateSyncer;
 using PersonalUrlShortener.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,7 +20,6 @@ builder.Services.AddAuthorization(options =>
 });
 
 builder.Services.AddCascadingAuthenticationState();
-builder.Services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAuthenticationStateProvider>();
 
 builder.Services.AddBlazorise().AddFontAwesomeIcons().AddEmptyProviders();
 
@@ -71,8 +68,7 @@ app.MapGet("/Account/Logout", async (HttpContext httpContext) =>
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
-    .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(PersonalUrlShortener.Client._Imports).Assembly);
+    .AddInteractiveWebAssemblyRenderMode();
 
 app.MapFallback(() =>
 {
