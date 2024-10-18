@@ -3,8 +3,7 @@
 <!-- Profile dropdown -->
 <AuthorizeView>
     <Authorized>
-        @* <OutsideClickHandler class="relative self-center" OnOutsideClick="CloseUserMenu" StopPropagation="!UserMenuVisible"> *@
-        <div class="relative self-center">
+        <OutsideClickHandler class="relative self-center" OnClick="CloseUserMenu">
             <button type="button" class="-m-1.5 flex items-center p-1.5" id="user-menu-button" aria-expanded="false" aria-haspopup="true" @onclick:stopPropagation="true" @onclick="ToggleUserMenu">
                 <span class="sr-only">Open user menu</span>
                 <img class="h-8 w-8 rounded-full bg-gray-50" src="@Picture" alt="">
@@ -39,8 +38,7 @@
                 @* <a href="#" class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="user-menu-item-0">Your profile</a> *@
                 <a href="Account/Logout" class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="user-menu-item-1">Sign out</a>
             </TailwindTransitionalElement>
-        </div>
-        @* </OutsideClickHandler> *@
+        </OutsideClickHandler>
     </Authorized>
     <NotAuthorized>
         <a href="Account/Login" class="-m-1.5 flex items-center p-1.5" id="user-signin-button">

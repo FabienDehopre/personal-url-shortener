@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Components;
 
-namespace PersonalUrlShortener.Client.Components;
+namespace PersonalUrlShortener.Shared;
 
 public class TailwindTransitionalComponentBase : ComponentBase
 {

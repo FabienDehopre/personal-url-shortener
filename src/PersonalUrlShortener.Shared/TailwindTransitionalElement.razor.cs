@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace PersonalUrlShortener.Client.Components;
+namespace PersonalUrlShortener.Shared;
 
 public partial class TailwindTransitionalElement : TailwindTransitionalComponentBase
 {

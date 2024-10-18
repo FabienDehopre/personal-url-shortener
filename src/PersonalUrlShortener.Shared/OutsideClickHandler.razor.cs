@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
-namespace PersonalUrlShortener.Client.Components;
+namespace PersonalUrlShortener.Shared;
 
 public partial class OutsideClickHandler : ComponentBase, IAsyncDisposable
 {
@@ -46,7 +46,7 @@ public partial class OutsideClickHandler : ComponentBase, IAsyncDisposable
         {
             _dotNetObjectRef ??= DotNetObjectReference.Create(this);
             var moduleName = nameof(OutsideClickHandler);
-            var module = await JsRuntime.InvokeAsync<IJSObjectReference>("import", $"./_content/PersonalUrlShortener.Client/Components/{moduleName}.razor.js");
+            var module = await JsRuntime.InvokeAsync<IJSObjectReference>("import", $"./_content/PersonalUrlShortener.Shared/{moduleName}.razor.js");
             _handleRef = await module.InvokeAsync<IJSObjectReference>($"{moduleName}.createInstance", Element, _dotNetObjectRef);
             await module.DisposeAsync();
         }
