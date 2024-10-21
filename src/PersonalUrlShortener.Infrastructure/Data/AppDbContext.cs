@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using PersonalUrlShortener.Core.Entities;
 
-namespace PersonalUrlShortener.Infrastructure;
+namespace PersonalUrlShortener.Infrastructure.Data;
 
-public class AppContext : DbContext
+public class AppDbContext : DbContext
 {
-    public AppContext(DbContextOptions<AppContext> options) : base(options)
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
     }
     
@@ -15,6 +15,6 @@ public class AppContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
     }
 }
