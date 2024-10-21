@@ -1,6 +1,7 @@
 using Auth0.AspNetCore.Authentication;
 using Blazorise;
 using Blazorise.Icons.FontAwesome;
+using IdGen.DependencyInjection;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using PersonalUrlShortener.Components;
@@ -27,6 +28,8 @@ builder.Services.AddBlazorise().AddFontAwesomeIcons().AddEmptyProviders();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddIdGen(1);
 
 var app = builder.Build();
 
