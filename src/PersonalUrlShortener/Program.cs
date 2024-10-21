@@ -5,8 +5,15 @@ using IdGen.DependencyInjection;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using PersonalUrlShortener.Components;
+using AppContext = PersonalUrlShortener.Infrastructure.AppContext;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AddServiceDefaults();
+builder.AddNpgsqlDbContext<AppContext>("personal-url-shortener-db");
+builder.AddRedisOutputCache("cache");
+// https://learn.microsoft.com/en-us/dotnet/aspire/caching/caching-integrations?tabs=dotnet-cli#configure-the-api-with-distributed-caching
+builder.Services.AddIdGen(1); // TODO: find a way to generate the generator id
 
 builder.Services.AddAuth0WebAppAuthentication(options =>
 {
@@ -28,8 +35,6 @@ builder.Services.AddBlazorise().AddFontAwesomeIcons().AddEmptyProviders();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
-
-builder.Services.AddIdGen(1);
 
 var app = builder.Build();
 
