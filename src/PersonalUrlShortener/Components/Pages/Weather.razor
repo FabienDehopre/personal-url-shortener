@@ -1,8 +1,6 @@
 ﻿@page "/weather"
-@using Microsoft.AspNetCore.OutputCaching
 @attribute [Authorize("OnlyMe")]
 @attribute [StreamRendering]
-@attribute [OutputCache(Duration = 10)]
 
 <PageTitle>Weather</PageTitle>
 
