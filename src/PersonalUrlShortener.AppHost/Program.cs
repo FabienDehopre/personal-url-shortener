@@ -9,8 +9,12 @@ var db = builder.AddPostgres("postgres", dbUser, dbPass)
     .WithDataVolume("postgres_data")
     .AddDatabase("personal-url-shortener-db");
 
-builder.AddProject<Projects.PersonalUrlShortener>("PersonalUrlShortener")
+builder.AddProject<Projects.PersonalUrlShortener>("frontend")
+    .WithHttpsEndpoint(port: 7173)
     .WithReference(redis)
+    .WithReference(db);
+
+builder.AddProject<Projects.PersonalUrlShortener_MigrationService>("db-migration")
     .WithReference(db);
 
 builder.Build().Run();
