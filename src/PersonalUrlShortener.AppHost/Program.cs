@@ -1,12 +1,14 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
 var redis = builder.AddRedis("cache")
-    .WithDataVolume("redis_data");
+    .WithRedisCommander()
+    .WithDataVolume("redis_data", isReadOnly: false);
 
 var dbUser = builder.AddParameter("db-user", secret: true);
 var dbPass = builder.AddParameter("db-pass", secret: true);
 var db = builder.AddPostgres("postgres", dbUser, dbPass)
-    .WithDataVolume("postgres_data")
+    .WithDataVolume("postgres_data", isReadOnly: false)
+    .WithPgWeb()
     .AddDatabase("personal-url-shortener-db");
 
 builder.AddProject<Projects.PersonalUrlShortener>("frontend")
