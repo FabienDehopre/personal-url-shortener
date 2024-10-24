@@ -1,6 +1,5 @@
 ﻿@page "/claims"
 @attribute [Authorize]
-@inject AuthenticationStateProvider GetAuthenticationStateAsync
 
 <div class="px-4 sm:px-0">
     <h3 class="text-base font-semibold leading-7 text-gray-900">My Claims</h3>
@@ -20,12 +19,17 @@
 </div>
 
 @code {
+    [CascadingParameter]
+    private Task<AuthenticationState>? AuthenticationState { get; set; }
     private List<(string Name, string Value)> MyClaims { get; } = new();
 
     protected override async Task OnInitializedAsync()
     {
-        var authState = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
-        var user = authState.User;
-        MyClaims.AddRange(user.Claims.Select(c => (c.Type, c.Value)));
+        if (AuthenticationState is not null)
+        {
+            var authState = await AuthenticationState;
+            var user = authState.User;
+            MyClaims.AddRange(user.Claims.Select(c => (c.Type, c.Value)));
+        }
     }
 }

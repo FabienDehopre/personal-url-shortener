@@ -1,5 +1,5 @@
 ﻿@page "/weather"
-@attribute [Authorize("OnlyMe")]
+@attribute [Authorize(Policy = "OnlyMe")]
 @attribute [StreamRendering]
 
 <PageTitle>Weather</PageTitle>
@@ -43,7 +43,6 @@ else
 @code {
     [CascadingParameter]
     private Task<AuthenticationState>? AuthenticationState { get; set; }
-
     private WeatherForecast[]? Forecasts { get; set; }
     private string Username { get; set; } = "";
 

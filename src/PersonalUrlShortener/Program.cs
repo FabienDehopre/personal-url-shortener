@@ -1,11 +1,17 @@
 using Auth0.AspNetCore.Authentication;
 using Blazorise;
 using Blazorise.Icons.FontAwesome;
+using IdGen.DependencyInjection;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using PersonalUrlShortener.Components;
+using PersonalUrlShortener.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AddServiceDefaults();
+builder.AddNpgsqlDbContext<AppDbContext>("personal-url-shortener-db");
+builder.Services.AddIdGen(1); // TODO: find a way to generate the generator id
 
 builder.Services.AddAuth0WebAppAuthentication(options =>
 {
@@ -54,7 +60,7 @@ app.MapGet("/Account/Login", async (HttpContext httpContext, string returnUrl = 
         .Build();
 
     await httpContext.ChallengeAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
-});
+}).AllowAnonymous();
 
 app.MapGet("/Account/Logout", async (HttpContext httpContext) =>
 {
@@ -64,7 +70,7 @@ app.MapGet("/Account/Logout", async (HttpContext httpContext) =>
 
     await httpContext.SignOutAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
     await httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-});
+}).RequireAuthorization();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
@@ -73,6 +79,6 @@ app.MapRazorComponents<App>()
 app.MapFallback(() =>
 {
     return Results.Redirect("/weather");
-});
+}).AllowAnonymous();
 
 app.Run();
