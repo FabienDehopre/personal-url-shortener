@@ -7,7 +7,7 @@ var db = builder.AddPostgres("postgres", dbUser, dbPass)
     .WithPgWeb()
     .AddDatabase("personal-url-shortener-db");
 
-builder.AddProject<Projects.PersonalUrlShortener>("frontend")
+builder.AddProject<Projects.PersonalUrlShortener_Web>("frontend")
     .WithHttpsEndpoint(port: 7173)
     .WithReference(db);
 

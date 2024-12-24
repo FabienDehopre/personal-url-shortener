@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalUrlShortener", "src\PersonalUrlShortener\PersonalUrlShortener.csproj", "{9D1DAB05-E249-400E-A953-517EB92A075C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalUrlShortener.Web", "src\PersonalUrlShortener.Web\PersonalUrlShortener.Web.csproj", "{9D1DAB05-E249-400E-A953-517EB92A075C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8274FB62-C422-4EF9-8671-A1A1CF80B17D}"
 EndProject

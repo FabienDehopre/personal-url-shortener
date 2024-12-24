@@ -17,7 +17,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\PersonalUrlShortener.MigrationService\PersonalUrlShortener.MigrationService.csproj" />
-      <ProjectReference Include="..\PersonalUrlShortener\PersonalUrlShortener.csproj" />
+      <ProjectReference Include="..\PersonalUrlShortener.Web\PersonalUrlShortener.Web.csproj" />
     </ItemGroup>
 
 </Project>

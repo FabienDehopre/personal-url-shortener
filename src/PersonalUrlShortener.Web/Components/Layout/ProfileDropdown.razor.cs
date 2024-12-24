@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 
-namespace PersonalUrlShortener.Components.Layout;
+namespace PersonalUrlShortener.Web.Components.Layout;
 
 public partial class ProfileDropdown : ComponentBase
 {

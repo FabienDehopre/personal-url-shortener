@@ -4,7 +4,7 @@ using Blazorise.Icons.FontAwesome;
 using IdGen.DependencyInjection;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using PersonalUrlShortener.Components;
+using PersonalUrlShortener.Web.Components;
 using PersonalUrlShortener.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
